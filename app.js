@@ -17,6 +17,10 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
+app.use("*", () => {
+  throw new NotFoundError("Не найдено");
+});
+
 mongoose.connect("mongodb://127.0.0.1:27017/mydb");
 
 app.listen(PORT, () => {
