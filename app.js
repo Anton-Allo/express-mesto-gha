@@ -18,8 +18,8 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-app.use("*", (req, res, next) => {
-  res.status(NOT_FOUND).send({ message: "страница не найдена" });
+app.use((req, res, next) => {
+  res.status(NOT_FOUND).send({ message: "сервер не найден" });
   next();
 });
 
