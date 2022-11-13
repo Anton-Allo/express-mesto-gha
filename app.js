@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-app.use("*", (err, req, res, next) => {
+app.use((err, req, res, next) => {
   if (err.name === "CastError") {
     res.status(BAD_REQUEST).send({ message: "Переданы некорректные данные" });
   } else if (err.name === "ValidationError") {
@@ -29,12 +29,10 @@ app.use("*", (err, req, res, next) => {
     });
   } else {
     const { statusCode = SERVER_ERROR, message } = err;
-    res
-      .status(statusCode)
-      .send({
-        message:
-          statusCode === SERVER_ERROR ? "На сервере произошла ошибка" : message,
-      });
+    res.status(statusCode).send({
+      message:
+        statusCode === SERVER_ERROR ? "На сервере произошла ошибка" : message,
+    });
   }
   next();
 });
