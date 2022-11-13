@@ -24,6 +24,10 @@ app.use("*", (req, res, next) => {
   next(new NotFoundError(errorMessages.incorrectRoute));
 });
 
+app.use((err, req, res, next) => {
+  res.status(err.statusCode).send({ message: err.message });
+});
+
 mongoose.connect("mongodb://127.0.0.1:27017/mydb");
 
 app.listen(PORT, () => {
