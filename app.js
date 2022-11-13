@@ -19,7 +19,9 @@ app.use((req, res, next) => {
 app.use(routes);
 
 app.use("*", (req, res) => {
-  res.status(404).send({ message: "страницы не существует" });
+  res
+    .status(http2.HTTP_STATUS_NOT_FOUND)
+    .send({ message: "страницы не существует" });
 });
 
 mongoose.connect("mongodb://127.0.0.1:27017/mydb");
