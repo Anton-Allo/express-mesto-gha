@@ -18,9 +18,10 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-app.use("*", (req, res) =>
-  res.status(NOT_FOUND).send({ message: "несуществующая страница" })
-);
+app.use("*", (req, res, next) => {
+  res.status(NOT_FOUND).send({ message: "страница не найдена" });
+  next();
+});
 
 mongoose.connect("mongodb://127.0.0.1:27017/mydb");
 
