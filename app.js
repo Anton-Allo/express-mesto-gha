@@ -17,7 +17,7 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-app.use("/*", (req, res) => {
+app.use("*", (req, res) => {
   res.status(404).send({ message: "страницы не существует" });
 });
 
