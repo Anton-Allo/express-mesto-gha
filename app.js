@@ -19,7 +19,9 @@ app.use((req, res, next) => {
 app.use(routes);
 
 app.use((req, res, next) => {
-  res.status(NOT_FOUND).send({ message: "сервер не найден" });
+  if (res.status(NOT_FOUND)) {
+    res.send({ message: "сервер не найден" });
+  }
   next();
 });
 
