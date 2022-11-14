@@ -17,15 +17,8 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-// app.use("*", (req, res) => {
-//   res.status(404).send({ message: "страницы не существует" });
-// });
-app.use("*", (req, res, next) => {
-  next(new NotFoundError(errorMessages.incorrectRoute));
-});
-
-app.use((err, req, res, next) => {
-  res.status(err.statusCode).send({ message: err.message });
+app.all("/*", (req, res) => {
+  res.status(404).send({ message: "страницы не существует" });
 });
 
 mongoose.connect("mongodb://127.0.0.1:27017/mydb");
