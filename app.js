@@ -1,7 +1,7 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const routes = require("./routes");
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const routes = require('./routes');
 
 const { PORT = 3000 } = process.env;
 const app = express();
@@ -9,7 +9,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use((req, res, next) => {
   req.user = {
-    _id: "63713473b39ed1106ec467fd",
+    _id: '63713473b39ed1106ec467fd',
   };
 
   next();
@@ -17,11 +17,11 @@ app.use((req, res, next) => {
 
 app.use(routes);
 
-app.all("/*", (req, res) => {
-  res.status(404).send({ message: "страницы не существует" });
+app.all('/*', (req, res) => {
+  res.status(404).send({ message: 'страницы не существует' });
 });
 
-mongoose.connect("mongodb://127.0.0.1:27017/mydb");
+mongoose.connect('mongodb://127.0.0.1:27017/mydb');
 
 app.listen(PORT, () => {
   console.log(`App listening on port ${PORT}`);
